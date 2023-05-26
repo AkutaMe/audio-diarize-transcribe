@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Speech Transcriber</title>
+    <style>
+      .box {
+        flex: 1;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .box:first-child {
+        margin-right: 10px;
+      }
+
+      .box:last-child {
+        margin-left: 10px;
+      }
+
+      .box h2 {
+        margin-top: 0;
+      }
+
+      .box .form-group {
+        margin-bottom: 20px;
+      }
+
+      .box input[type="file"] {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .box .btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      }
+
+      .box .btn:hover {
+        background-color: #45a049;
+      }
+
+      #transcription_result {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        min-height: 200px;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #error_message {
+        color: #d9534f;
+        margin-top: 10px;
+        text-align: center;
+      }
+    </style>
+    <script>
+      function transcribeAudio() {
+        var form = document.getElementById("upload-form");
+        var fileInput = document.getElementById("audio_file");
+        var resultDiv = document.getElementById("transcription_result");
+        var errorMessageDiv = document.getElementById("error_message");
+
+        if (fileInput.files.length === 0) {
+          errorMessageDiv.textContent = "Please select an audio file.";
+          return;
+        }
+
+        errorMessageDiv.textContent = "";
+
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              resultDiv.innerHTML = "<p>" + response.transcript + "</p>";
+            } else {
+              errorMessageDiv.textContent =
+                "Transcription failed. Please try again.";
+            }
+          }
+        };
+
+        xhr.open("POST", "/");
+        xhr.send(formData);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <h2>Upload Audio File</h2>
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          action="/"
+          id="upload-form"
+        >
+          <div class="form-group">
+            <input
+              type="file"
+              name="audio_file"
+              id="audio_file"
+              accept=".wav, .mp3"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="button"
+              value="Get Results"
+              class="btn"
+              onclick="transcribeAudio()"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="box">
+        <h2>Transcription Results</h2>
+        <div id="transcription_result"></div>
+        <div id="error_message"></div>
+      </div>
+    </div>
+  </body>
+</html>
