@@ -1,4 +1,4 @@
-verything related to audio transcription and diarization.  
+First, I began researching Whisper, WhisperX, and everything related to audio transcription and diarization.  
 
 I was able to install Whisper and use it in my code, but WhisperX was giving me some problems!  So, I started researching different ways to approach this problem. I found PyDub, pyAudioAnalysis, and similar libraries, which didn't really work for me. 
 
