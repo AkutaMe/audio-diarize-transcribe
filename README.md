@@ -20,7 +20,7 @@ I am still pretty sure I am using correct functionality in my python code of GET
 
 I believe my problem lies in how I am running the Python Flask server. I am almost certain that I am executing all the necessary steps correctly, but the outcomes indicate otherwise. 
 
-I will provide both the Python code that utilizes AssemblyAI and my attempt to transform it into a functional website. 
+I will provide both the Python code that utilizes AssemblyAI(assemblyai.py) and my attempt to transform it into a functional website. 
 
 I would greatly appreciate it if I could receive feedback on my errors!  
 
