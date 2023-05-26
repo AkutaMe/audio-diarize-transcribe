@@ -26,4 +26,4 @@ I would greatly appreciate it if I could receive feedback on my errors!
 
 P.S. Please do not assume that my message indicates that I have given up on the task. On the contrary, I am genuinely intrigued by this topic, and I am reaching out for feedback to enhance my results. As we both acknowledge, I am new to this field, so receiving feedback is the most valuable input I can receive at this point. 
 
-I added comments in every field that executes something for better understanding. 
+I added comments in every field on app.py that executes something for better understanding. 
